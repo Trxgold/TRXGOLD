@@ -18,7 +18,7 @@ infrastructure. TRGO built on Tron blockchain. We are trc20 token based on tron 
 If you have any feedback, please reach out to us at info@trxgold.org.
 
   
-## Social Linls
+## Social Links
 
 - [Telegram](https://t.me/trxgold_official)
 - [Twitter](https://twitter.com/trxgoldofficial)
