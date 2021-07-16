@@ -20,8 +20,8 @@ If you have any feedback, please reach out to us at info@trxgold.org.
   
 ## Social Linls
 
-- [Telegram](https://trxgold.org/)
-- [Twitter](https://trxgold.org/)
+- [Telegram](https://t.me/trxgold_official)
+- [Twitter](https://twitter.com/trxgoldofficial)
 - [Our Website](https://trxgold.org/)
 
   
