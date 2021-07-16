@@ -22,7 +22,7 @@ If you have any feedback, please reach out to us at info@trxgold.org.
 
 - [Telegram](https://t.me/trxgold_official)
 - [Twitter](https://twitter.com/trxgoldofficial)
-- [Instagram](https://www.instagram.com/trgo_offical)
+- [Instagram](https://www.instagram.com/trgo_official)
 - [Our Website](https://trxgold.org/)
 
   
