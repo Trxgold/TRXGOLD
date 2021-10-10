@@ -83,7 +83,7 @@ contract TronGold is owned {
     string constant private _name = "TrGold";
     string constant private _symbol = "TRGO";
     uint256 constant private _decimals = 6;
-    uint256 private _totalSupply = 100000000 * (10**_decimals);         //100 million tokens
+    uint256 private _totalSupply;
     uint256 constant public maxSupply = 100000000 * (10**_decimals);    //100 million tokens
     uint constant private _preMine =  10000000 * (10**_decimals);       // 10 million token for deployer 
     uint private _deadline;
@@ -114,7 +114,7 @@ contract TronGold is owned {
 
 
     /*======================================
-    =       STANDARD TRC20 FUNCTIONS       =
+    =       STANDARD ERC20 FUNCTIONS       =
     ======================================*/
     
     /**
@@ -267,10 +267,10 @@ contract TronGold is owned {
     ======================================*/
     
     constructor() public{
-        //sending all the tokens to Owner
+        //sending all premine tokens to Owner
         _balanceOf[owner] = _preMine;
-        _deadline         = now + (1*1 days);
-        
+        _deadline         = now + (1 days);
+        _totalSupply = _preMine;
         //firing event which logs this transaction
         emit Transfer(address(0), owner, _preMine);
     }
@@ -279,13 +279,26 @@ contract TronGold is owned {
 
     }
 
+	function waitingTimeToClaimTokens() public view returns(uint256){
+		if(now > _deadline){
+			return 0;
+		}
+		else{
+			return _deadline - now;
+		}
+	
+	}
+	
+    function claimTodayTokens() public onlyOwner returns(string memory){
 
-    function getTodayTokens() public{
-
-        uint _dailyQuota =  1000 * (10**_decimals);    
-        // require(msg.sender==owner,"invalid owner");
-        require(now>_deadline,"already active today Tokens Quota");
-        _balanceOf[msg.sender]+=_dailyQuota;
+        uint _dailyQuota =  10000 * (10**_decimals);    
+        require(now>=_deadline,"already active today Tokens Quota");
+        require((_totalSupply + _dailyQuota) <= maxSupply, "Max supply is reached");
+        _balanceOf[owner]+=_dailyQuota;
+        _totalSupply +=_dailyQuota;
+		_deadline = now + (1 days);
+		emit Transfer(address(0), owner, _dailyQuota);
+		return "Successfully claimed tokens";
     }
 
     /**
@@ -335,19 +348,7 @@ contract TronGold is owned {
         emit  FrozenAccounts(target, freeze);
     }
     
-    /** 
-        * @notice Create `mintedAmount` tokens and send it to `target`
-        * @param target Address to receive the tokens
-        * @param mintedAmount the amount of tokens it will receive
-        */
-    function mintToken(address target, uint256 mintedAmount) onlyOwner public {
-        require(_totalSupply.add(mintedAmount) <= maxSupply, "Cannot Mint more than maximum supply");
-        _balanceOf[target] = _balanceOf[target].add(mintedAmount);
-        _totalSupply = _totalSupply.add(mintedAmount);
-        emit Transfer(address(0), target, mintedAmount);
-    }
-
-        
+       
 
     /**
         * Owner can transfer tokens from contract to owner address
@@ -388,3 +389,4 @@ contract TronGold is owned {
     
 
 }
+
