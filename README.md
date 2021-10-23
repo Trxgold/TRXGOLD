@@ -10,7 +10,7 @@ infrastructure. TRGO built on Tron blockchain. We are trc20 token based on tron 
 
 - Total supply 100 million
 - Circulating supply 10 million
-- 90% of the coins will be mintable on daily basis with a capping of 1000 tokens per day
+- 90% of the coins will be mintable on daily basis with a capping of 10,000 tokens per day
 
   
 ## Feedback
